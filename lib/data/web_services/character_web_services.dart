@@ -3,10 +3,10 @@ import 'package:dio/dio.dart';
 import '../models/character_model/character_model.dart';
 
 class CharacterWebServices {
-  late Dio _dio;
+  final  Dio _dio;
   final String _baseUrl = ApiEndpoints.baseUrl;
 
-  CharacterWebServices() {
+  CharacterWebServices(this._dio) {
     _dio.options = BaseOptions(
       baseUrl: ApiEndpoints.baseUrl,
       receiveDataWhenStatusError: true,

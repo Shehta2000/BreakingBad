@@ -2,6 +2,7 @@
 import 'package:breaking_bad/data/cubit/cubit/character_cubit.dart';
 import 'package:breaking_bad/data/repos/character_repo.dart';
 import 'package:breaking_bad/data/web_services/character_web_services.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../presentation/screens/character_details_screen.dart';
@@ -13,26 +14,22 @@ class AppRouter {
   late CharacterCubit characterCubit;
 
   AppRouter() {
-    characterRepo = CharacterRepo(CharacterWebServices());
+    characterRepo = CharacterRepo(CharacterWebServices(
+       Dio(),
+    ));
     characterCubit = CharacterCubit(characterRepo);
   }
-
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppStrings.charactersScreen:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => CharacterCubit(
-                    characterRepo,
-                  ),
-                  child: const CharacterScreen(),
-                ));
+            builder: (_) => const CharacterScreen());
       case AppStrings.characterDetailsScreen:
         return MaterialPageRoute(
             builder: (_) => const CharacterDetailsScreen());
 
       default:
     }
-    return null;
+    
   }
 }
