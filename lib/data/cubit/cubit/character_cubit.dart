@@ -1,26 +1,32 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:breaking_bad/data/models/character_model/character_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:breaking_bad/data/repos/character_repo.dart';
-part 'character_state.dart';
+
+import '../../models/character_model/character_model.dart';
+import '../../repos/character_repo.dart';
+import 'character_state.dart';
+
 
 class CharacterCubit extends Cubit<CharacterState> {
-  final CharacterRepo _characterRepo;
+  final CharacterRepo characterRepo;
   List<CharacterModel> characters = [];
 
-  CharacterCubit(CharacterRepo characterRepo, )
-      : _characterRepo = characterRepo,
-        super(CharacterInitial());
+  CharacterCubit({required this.characterRepo}) : super(CharactersInitial());
 
-  List<CharacterModel> getAllCharacters() {
-    _characterRepo.getAllCharacters().then((characters) {
-      emit(CharactersLoaded(characters));
-      this.characters = characters;
-    });
+  void getAllCharacters() async {
+    try {
+      emit(CharactersLoading());
 
-    return characters;
+      characters = await characterRepo.getAllCharacters();
+      print("✅ Characters in Cubit: $characters"); // ✅ التأكد من استقبال البيانات
+
+      if (characters.isEmpty) {
+        emit(CharactersError("No data available"));
+      } else {
+        emit(CharactersLoaded(characters));
+      }
+    } catch (e) {
+      print("❌ Error in CharacterCubit: $e");
+      emit(CharactersError("Failed to load characters"));
+    }
   }
-
-
 }

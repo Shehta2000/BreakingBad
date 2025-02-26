@@ -1,12 +1,19 @@
-part of 'character_cubit.dart';
+
+import '../../models/character_model/character_model.dart';
 
 abstract class CharacterState {}
 
-final class CharacterInitial extends CharacterState {}
+class CharactersInitial extends CharacterState {}
 
+class CharactersLoading extends CharacterState {}
 
 class CharactersLoaded extends CharacterState {
-  final List<CharacterModel> characters;
+  final List<CharacterModel> characters; // ✅ تأكد أن النوع صحيح
 
   CharactersLoaded(this.characters);
+}
+
+class CharactersError extends CharacterState {
+  final String message;
+  CharactersError(this.message);
 }
