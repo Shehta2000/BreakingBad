@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
 import '../../data/models/character_model/character_model.dart';
@@ -19,7 +18,6 @@ class CharacterItemViewBody extends StatelessWidget {
       margin: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: AppColors.myWhite,
         borderRadius: BorderRadius.circular(6),
       ),
       child: InkWell(
