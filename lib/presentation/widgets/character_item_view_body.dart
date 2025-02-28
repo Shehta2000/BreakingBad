@@ -18,32 +18,31 @@ class CharacterItemViewBody extends StatelessWidget {
       margin: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
+        color: AppColors.myYellow,
         borderRadius: BorderRadius.circular(6),
       ),
       child: InkWell(
         onTap: () {
-          () => Navigator.pushNamed(context, AppStrings.characterDetailsScreen,
-            arguments: character);
+           Navigator.pushNamed(
+              context, AppStrings.characterDetailsScreen,
+              arguments: character);
         },
         child: GridTile(
           footer: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             color: Colors.black54,
             alignment: Alignment.bottomCenter,
-            child: Text(
-              character.name,
-              style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.myWhite,
-                fontWeight: FontWeight.bold,
-              ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              textAlign: TextAlign.center
-            ),
+            child: Text(character.name,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColors.myWhite,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                textAlign: TextAlign.center),
           ),
           child: Hero(
-            tag: character.name, // استخدام name أو id بدلاً من call()
+            tag: character.id, //)
             child: Container(
               width: double.infinity,
               color: AppColors.myGrey,
