@@ -7,7 +7,7 @@ class CharacterWebServices {
 
   Future<List<dynamic>> fetchCharacters() async {
     try {
-      Response response = await dio.get('https://rickandmortyapi.com/api/character');
+      Response response = await dio.get('https://rickandmortyapi.com/api/character/');
 
       if (response.statusCode == 200) {
         print("✅ API Response: ${response.data}"); // ✅ طباعة البيانات للتحقق

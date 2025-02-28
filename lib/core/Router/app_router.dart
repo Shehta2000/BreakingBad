@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/cubit/cubit/character_cubit.dart';
+import '../../data/models/character_model/character_model.dart';
 import '../../data/repos/character_repo.dart';
 import '../../data/web_services/character_web_services.dart';
 import '../../presentation/screens/character_details_screen.dart';
@@ -33,8 +34,11 @@ class AppRouter {
           ),
         );
    case AppStrings.characterDetailsScreen:
+             final character = settings.arguments as CharacterModel;
         return MaterialPageRoute(
-          builder: (_) => const CharacterDetailsScreen(),
+          builder: (_) =>   CharacterDetailsScreen(
+            character: character,
+          ),
         );
       default:
         return null;
